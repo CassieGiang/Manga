@@ -1,0 +1,13 @@
+main { max-width: 900px; }
+.reader-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem; margin: 1rem 0; }
+.reader-controls[hidden], #pages figure[hidden] { display: none; }
+.reader-controls button, .reader-controls select {
+  min-height: 44px; padding: .45rem .8rem; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--panel); color: var(--ink); font: inherit;
+}
+.reader-controls button:enabled { cursor: pointer; }
+.reader-controls button:enabled:hover, .reader-controls button[aria-pressed="true"] { background: var(--ai-soft); color: var(--ai); }
+.reader-controls button:disabled { opacity: .5; }
+#pages figure { margin: 0 auto 1.5rem; max-width: 760px; text-align: center; scroll-margin-top: 4rem; }
+#pages img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; background: var(--panel); border: 1px solid var(--line); }
+#pages figcaption { margin-top: .4rem; color: var(--muted); }
