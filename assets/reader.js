@@ -4,32 +4,32 @@ const buttons = document.querySelectorAll('[data-step]');
 const select = document.querySelector('#page-select');
 const layout = document.querySelector('#layout');
 const position = document.querySelector('#position');
-let page = 1;
+let page = 0;
 let scrolling = false;
 
-for (let number = 1; number <= pages.length; number += 1) {
-  select.add(new Option(number + ' / ' + pages.length, number));
-}
+pages.forEach((figure, index) => {
+  select.add(new Option(figure.querySelector('figcaption').textContent, index));
+});
 
 function render() {
-  const requested = Number(location.hash.match(/^#page-(\d+)$/)?.[1]);
-  page = requested >= 1 && requested <= pages.length ? requested : 1;
+  const requested = pages.findIndex(figure => '#' + figure.id === location.hash);
+  page = Math.max(requested, 0);
   pages.forEach((figure, index) => {
-    figure.hidden = !scrolling && index + 1 !== page;
+    figure.hidden = !scrolling && index !== page;
   });
   select.value = page;
-  position.textContent = 'Page ' + page + ' of ' + pages.length;
+  position.textContent = pages[page].querySelector('figcaption').textContent;
   buttons.forEach(button => {
     const target = page + Number(button.dataset.step);
-    button.disabled = target < 1 || target > pages.length;
+    button.disabled = target < 0 || target >= pages.length;
   });
 }
 
 function show(number) {
-  if (number < 1 || number > pages.length) return;
-  if (number !== page) history.pushState(null, '', '#page-' + number);
+  if (number < 0 || number >= pages.length) return;
+  if (number !== page) history.pushState(null, '', '#' + pages[number].id);
   render();
-  pages[page - 1].scrollIntoView();
+  pages[page].scrollIntoView();
 }
 
 buttons.forEach(button => button.addEventListener('click', () => show(page + Number(button.dataset.step))));
@@ -41,7 +41,7 @@ layout.addEventListener('click', () => {
 });
 window.addEventListener('hashchange', () => {
   render();
-  pages[page - 1].scrollIntoView();
+  pages[page].scrollIntoView();
 });
 window.addEventListener('keydown', event => {
   if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.target.closest('input, select, textarea, [contenteditable]')) return;
@@ -52,4 +52,4 @@ window.addEventListener('keydown', event => {
 });
 render();
 controls.forEach(control => { control.hidden = false; });
-if (location.hash) pages[page - 1].scrollIntoView();
+if (location.hash) pages[page].scrollIntoView();
