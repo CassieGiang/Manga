@@ -1,0 +1,72 @@
+/* Character sheets. Builds on style.css (washi paper, sumi ink, indigo; vermilion for rank seals). */
+main { max-width: 1000px; }
+
+/* index */
+.grid.chars { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); margin-top: 18px; }
+.charcard { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; color: var(--ink); text-decoration: none; transition: border-color .15s, transform .15s; }
+.charcard:hover { border-color: var(--ai); transform: translateY(-2px); }
+.charcard img, .charcard .mon { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; background: var(--tag); }
+.charcard .mon { display: grid; place-items: center; font: 700 4.5rem/1 "Shippori Mincho", Georgia, serif; color: var(--ai); background: linear-gradient(160deg, var(--ai-soft), var(--tag)); }
+.charcard b { padding: 10px 12px 0; font-family: "Shippori Mincho", Georgia, serif; font-size: 1.12rem; }
+.charcard span:not(.mon) { padding: 2px 12px 0; color: var(--ink); font-size: .9rem; }
+.charcard small { padding: 4px 12px 12px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .charcard { transition: none; } .charcard:hover { transform: none; } }
+
+/* character header */
+.chero { display: flex; gap: 26px; align-items: flex-start; margin: 6px 0 8px; }
+.portrait { width: 230px; flex: none; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); aspect-ratio: 3 / 4; object-fit: cover; object-position: top; }
+.portrait.art { aspect-ratio: auto; object-fit: contain; }
+.cmeta { flex: 1; min-width: 0; }
+.cmeta h1 { margin-top: 0; }
+.cmeta .lead { margin: 0 0 12px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 0; margin: 0 0 12px; background: var(--panel); border: 1px solid var(--line); border-left: 5px solid var(--ai); border-radius: 10px; overflow: hidden; }
+.facts div { padding: 8px 14px; border-bottom: 1px solid var(--line); }
+.facts dt { color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; }
+.facts dd { margin: 0; font-weight: 600; }
+.meta code { font-size: .82rem; }
+
+/* gallery */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.gallery figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.gallery img { display: block; width: 100%; aspect-ratio: 732 / 1075; object-fit: cover; }
+.gallery figcaption { padding: 6px 10px; font-family: "Shippori Mincho", Georgia, serif; font-weight: 700; text-align: center; }
+.gallery a:hover img { opacity: .9; }
+
+/* contents bar sticks under the toolbar */
+.toc { margin-top: 18px; }
+
+/* the forum posts */
+.post { overflow-wrap: anywhere; line-height: 1.65; }
+.post b, .post strong { color: var(--ink); }
+.post blockquote { margin: .6em 0; padding: 4px 14px; border-left: 3px solid var(--line); color: var(--ink); }
+.post hr { border: 0; border-top: 1px solid var(--line); margin: 1em 0; }
+.post ul, .post ol { padding-left: 1.4em; }
+.post table { width: auto; max-width: 100%; margin: .5em 0; display: block; overflow-x: auto; }
+.post td, .post th { border: 1px solid var(--line); }
+.post .tn { display: block; margin: 1.1em 0 .25em; padding: 6px 12px; background: var(--ai-soft); color: var(--ai); border-radius: 6px; font-family: "Shippori Mincho", Georgia, serif; font-weight: 700; font-size: 1.05rem; }
+.post .tn b { color: inherit; }
+.post .k { color: var(--muted); font-weight: 600; font-size: .86em; text-transform: uppercase; letter-spacing: .04em; margin-right: 2px; }
+.post .seal { font-style: normal; margin-right: 3px; vertical-align: 1px; }
+.post .pic { display: block; max-width: min(100%, 420px); height: auto; margin: .6em auto; border-radius: 8px; border: 1px solid var(--line); }
+.post .gone { display: inline-block; padding: 6px 12px; border: 1px dashed var(--line); border-radius: 6px; color: var(--muted); font-size: .85rem; }
+.post details.spoil { margin: .5em 0; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.post details.spoil > summary { cursor: pointer; padding: 6px 12px; color: var(--ai); font-size: .9rem; }
+.post details.spoil > div { padding: 4px 14px 10px; }
+details.sec > summary small { margin-left: auto; }
+details.sec > summary::after { margin-left: 10px; }
+mark { background: var(--soon-bg); color: var(--soon); border-radius: 3px; padding: 0 2px; }
+
+/* approval footer */
+.approval { margin-top: 34px; padding-top: 4px; border-top: 1px solid var(--line); }
+.approval h2 { margin-top: .8em; }
+.approval ul { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 8px; }
+.approval li { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.approval li small { color: var(--muted); margin-left: 8px; font-size: .82rem; }
+.approval li div { margin-top: 2px; }
+
+@media (max-width: 700px) {
+  .chero { flex-direction: column; }
+  .portrait { width: 100%; max-width: 320px; align-self: center; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  details.sec > summary { flex-wrap: wrap; }
+}
